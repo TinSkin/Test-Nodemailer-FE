@@ -2,7 +2,7 @@
 import { create } from "zustand"; // Zustand create store to manage global state
 import axios from "axios"; // Axios for making API requests
 
-const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/categories" : "/api/categories";
+const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/categories" : "https://test-nodemailer-be.onrender.com/api/categories";
 
 //! 3. Set up axios to always send cookies when making requests (useful for session authentication)
 const api = axios.create({
