@@ -5,7 +5,7 @@ import axios from "axios"; // Axios for making API requests
 //! 2. Identify API URL based on environment (development OR production)
 // If mode is in development environment (development), API_URL will be "http://localhost:5000/api/auth"
 // If mode is in production environment (production), API_URL will be "https://test-nodemailer-be.onrender.com/api/auth"
-const API_URL = import.meta.env.MODE === "development" ? "https://test-nodemailer-be.onrender.com/api/auth" : "http://localhost:5000/api/auth";
+const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/api/auth" : "https://test-nodemailer-be.onrender.com/api/auth";
 
 //! 3. Set up axios to always send cookies when making requests (useful for session authentication)
 const api = axios.create({

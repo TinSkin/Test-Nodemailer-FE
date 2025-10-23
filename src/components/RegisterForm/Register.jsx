@@ -49,48 +49,6 @@ const Register = ({ handleLogInClick }) => {
       }, 1500);
     } catch (error) {
       console.log("Backend register failed, trying fallback...", error);
-
-      // Fallback to mock API
-      try {
-        const users = await fetchAccounts();
-        const emailExists = users.some((user) => user.email === userData.email);
-
-        if (emailExists) {
-          setErrors({ email: "Email đã tồn tại!" });
-          Notification.error(
-            "Email đã tồn tại",
-            "Vui lòng sử dụng email khác."
-          );
-          return;
-        }
-
-        const mockUser = {
-          fullName: userData.userName,
-          phone: userData.phoneNumber,
-          email: userData.email,
-          password: userData.password,
-          role: "user",
-          status: "available",
-        };
-
-        const mockResponse = await fetch(
-          "https://mindx-mockup-server.vercel.app/api/resources/accounts_user?apiKey=67fe686cc590d6933cc1248b",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(mockUser),
-          }
-        );
-
-        if (!mockResponse.ok) throw new Error("Mock API failed");
-
-        Notification.success("Đăng ký thành công!", "Đang chuyển hướng...");
-        setTimeout(() => handleLogInClick(), 1500);
-      } catch (fallbackError) {
-        Notification.error("Đăng ký thất bại", "Không thể kết nối đến server");
-      } finally {
-        setSubmitting(false);
-      }
     }
   };
 

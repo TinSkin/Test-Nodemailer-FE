@@ -61,45 +61,6 @@ const Login = ({ handleRegisterClick }) => {
       }
     } catch (error) {
       console.log("Backend login failed, trying fallback...", error);
-
-      // Fallback to mock API
-      try {
-        const users = await fetchAccounts();
-        const user = users.find(
-          (acc) =>
-            acc.email === userData.email.trim() &&
-            acc.password === userData.password.trim()
-        );
-
-        if (user) {
-          // If found: save to localStorage
-          localStorage.setItem("user", JSON.stringify(user));
-          localStorage.setItem("isLoggedIn", "true");
-
-          Notification.success(
-            "Đăng nhập thành công!",
-            "Chào mừng bạn quay lại."
-          );
-
-          // Navigate based on role
-          if (user.role === "admin") {
-            navigate("/admin/products");
-          } else {
-            navigate("/");
-          }
-        } else {
-          // If not found: show error on email field
-          Notification.error("Đăng nhập thất bại", "Sai email hoặc mật khẩu.");
-          setErrors({ email: "Sai Email hoặc Mật khẩu" });
-        }
-      } catch (error) {
-        // Handle API call error
-        setErrors({ email: "Error Issue Log In" });
-        Notification.error("Đăng nhập thất bại", "Không lấy được dữ liệu.");
-      } finally {
-        // Stop loading state
-        setSubmitting(false);
-      }
     }
   };
 
